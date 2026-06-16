@@ -5,16 +5,18 @@ set -ouex pipefail
 ### Install packages
 
 # Install the akmod-wl driver, copied in the Containerfile
-echo "Building and installing Broadcom wl wireless drivers..."
+echo "Installing Broadcom wl wireless drivers..."
 
-echo "Enabling rpm fusion nonfree"
+echo "Active kernel is:"
+rpm -q kernel-core
 
-dnf5 install -y https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+echo "Driver files include:"
+find /opt/akmods-rpms -type f | sort
 
-echo "Installing akmod-wl"
 
-dnf5 install -y akmod-wl
+dnf5 install -y \
+    /opt/akmods-rpms/common/broadcom-wl-*.rpm \
+    /opt/akmods-rpms/kmods/kmod-wl-*.rpm
 
-echo "Cleaning up rpm fusion nonfree"
-
-dnf5 uninstall -y rpmfusion-nonfree-release
+# Cleanup rpms
+rm -rf /opt/akmods-rpms
