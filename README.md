@@ -1,9 +1,12 @@
 # bluefin-wl
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hjake123/bluefin-wl/build.yml)
+
 This image is intended to be a version of Bluefin latest with the Broadcom wl driver included.
 If you happen to have one of the chips that is only well served by wl, this is for you!
 
 The image will try to rebuild each time Bluefin updates, though the build will fail if Bluefin hasn't caught up to the akmods universalblue image.
+As of 2026-06-16, there has never yet been a sucessful run, so don't use this until after at least one successful run occurs!
 
 To rebase to this image, you could run:
 
